@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentService } from './student/service/student.service';
-import { StudentController } from './student/controller/student.controller';
-import { CreateStudentDto } from './student/entities/CreateStudent.dto';
+import { StudentUserModule } from './student-users/student-user.module';
+import entities from './typeorm';
 
 @Module({
   imports: [
@@ -13,11 +12,13 @@ import { CreateStudentDto } from './student/entities/CreateStudent.dto';
       username: 'root',
       password: 'root',
       database: 'mbaling_db',
-      entities: [CreateStudentDto],
+      entities: entities,
       synchronize: true,
     }),
+  StudentUserModule,
+  
   ],
-  controllers: [StudentController],
-  providers: [StudentService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
