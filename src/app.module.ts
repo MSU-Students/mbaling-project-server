@@ -1,18 +1,19 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentService } from './student/student.service';
-import { StudentController } from './student/student.controller';
+import { StudentService } from './student/service/student.service';
+import { StudentController } from './student/controller/student.controller';
+import { CreateStudentDto } from './student/entities/CreateStudent.dto';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
+  TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
       password: 'root',
       database: 'mbaling_db',
-      entities: [],
+      entities: [CreateStudentDto],
       synchronize: true,
     }),
   ],
