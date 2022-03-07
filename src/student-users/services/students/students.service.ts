@@ -46,4 +46,9 @@ export class StudentsService {
        const newStudent = this.studentRepository.create(createStudentDto);
        return this.studentRepository.save(newStudent)
     }
+
+    findStudentByUsername(username: string){
+        return this.studentRepository.findOne({username})
+
+    }
 }

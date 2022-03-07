@@ -7,7 +7,7 @@ import { CreateStudentDto } from 'src/student-users/dto/CreateStudent.dto';
 export class StudentsController {
 
     constructor(@Inject('STUDENT_SERVICE') private readonly studentService: StudentsService)
-    {}
+    { }
 
     @Get()
     getStudents(){
