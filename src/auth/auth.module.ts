@@ -1,3 +1,5 @@
+import { JwtModule } from '@nestjs/jwt';
+import { SessionSerializer } from './session.serializer';
 import { LocalStrategy } from './utils/LocalStrategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentsService } from './../student-users/services/students/students.service';
@@ -9,7 +11,12 @@ import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports:[
-    TypeOrmModule.forFeature([StudentUser]), PassportModule
+    TypeOrmModule.forFeature([StudentUser]),
+    JwtModule.register({
+      secret: 'SECRET',
+      signOptions: { expiresIn: '60s'}
+    }),
+    PassportModule.register({session: true})
   ],
   controllers: [AuthController],
   providers: [
@@ -21,7 +28,7 @@ import { PassportModule } from '@nestjs/passport';
       provide: 'STUDENT_SERVICE',
       useClass: StudentsService
     },
-    LocalStrategy
+    LocalStrategy, SessionSerializer
   ]
 })
 export class AuthModule {}

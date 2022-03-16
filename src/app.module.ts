@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentUserModule } from './student-users/student-user.module';
 import { AuthModule } from './auth/auth.module';
+import { PostformModule } from './postform/postform.module';
 import entities from './typeorm';
 
 @Module({
@@ -18,6 +19,7 @@ import entities from './typeorm';
     }),
   StudentUserModule,
   AuthModule,
+  PostformModule,
   
   ],
   controllers: [],

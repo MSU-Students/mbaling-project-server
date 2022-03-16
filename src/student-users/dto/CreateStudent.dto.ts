@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 
-export class CreateStudentDto {
+export class CreateStudentDto implements CreateStudentDto {
 
     @IsNotEmpty()
     @MinLength(3)
@@ -10,9 +10,10 @@ export class CreateStudentDto {
     @MinLength(8)
     password: string;
 
+    
     @IsNotEmpty()
     @IsEmail()
-    email: string;
+    email: string; 
     
     @IsNotEmpty()
     firstname: string;
@@ -25,4 +26,13 @@ export class CreateStudentDto {
     
     @IsNotEmpty()
     birthdate: string;
+
+    @IsNotEmpty()
+    degree: string;
+
+    @IsNotEmpty()
+    department: string;
+
+    @IsNotEmpty()
+    college: string;
  }

@@ -1,10 +1,11 @@
 import { StudentsService } from 'src/student-users/services/students/students.service';
 import { Inject, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
 
-    constructor(@Inject('STUDENT_SERVICE') private readonly studentService: StudentsService){
+    constructor(@Inject('STUDENT_SERVICE') private readonly studentService: StudentsService, private jwtService: JwtService){
 
     }
 

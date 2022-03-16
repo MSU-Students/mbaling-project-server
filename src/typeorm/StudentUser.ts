@@ -44,4 +44,19 @@ export class StudentUser{
         default:'',
         nullable: false})
     birthdate: string;
+
+    @Column({
+        default:'',
+        nullable: false})
+    degree: string;
+
+    @Column({
+        default:'',
+        nullable: false})
+    department: string;
+
+    @Column({
+        default:'',
+        nullable: false})
+    college: string;
 }

@@ -8,6 +8,9 @@ export interface StudentUser{
     lastname: string;
     middlename: string;
     birthdate: string;
+    degree: string;
+    department: string;
+    college: string;
 }
 
 export class SerializeStudentUser{
@@ -20,5 +23,8 @@ export class SerializeStudentUser{
     lastname: string;
     middlename: string;
     birthdate: string;
+    degree: string;
+    department: string;
+    college: string;
 
 }

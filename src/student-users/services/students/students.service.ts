@@ -13,42 +13,30 @@ export class StudentsService {
     constructor(@InjectRepository(StudentEntity) private readonly studentRepository: Repository<StudentEntity> ){
  
     }
-    private studentusers: StudentUser[] = [
-     {
-        username: 'StudentUsername',
-        password: 'StudentPassword',
-        email: 'StudentEmail@gmail.com',
-        firstname: 'FirstStudent',
-        lastname: 'LastStudent',
-        middlename: 'MiddleStudent', 
-        birthdate: '01/01/2010'
-    },
-    {
-        username: 'StudentUsername02',
-        password: 'StudentPassword02',
-        email: 'StudentEmail@gmail.com',
-        firstname: 'FirstStudent02',
-        lastname: 'LastStudent02',
-        middlename: 'MiddleStudent02',
-        birthdate: '01/01/2010'
-    },
-];
+    private studentusers: StudentUser[] = [];
 
-    getStudents(){
-        return this.studentusers.map((user) => plainToClass(SerializeStudentUser,user));
+    async getStudents(){
+        return this.studentRepository.find();
     }
 
-    getStudentByUsername(username: string){
+    async getStudentByUsername(username: string){
         return this.studentusers.find((user) => user.username === username);
     }
 
-    createStudent(createStudentDto: CreateStudentDto){
+    async createStudent(createStudentDto: CreateStudentDto){
        const newStudent = this.studentRepository.create(createStudentDto);
        return this.studentRepository.save(newStudent)
     }
 
-    findStudentByUsername(username: string){
+    async findStudentByUsername(username: string){
         return this.studentRepository.findOne({username})
-
     }
+
+    async update(id: number, editStudent: StudentEntity) {
+        return this.studentRepository.update(id, editStudent);
+      }
+
+    async deleteOne(id: number) {
+        return this.studentRepository.delete(id);
+      }
 }
