@@ -1,3 +1,5 @@
+import { PostEntity } from './typeorm/PostEntity';
+import { StudentUser } from './typeorm/StudentUser';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentUserModule } from './student-users/student-user.module';
@@ -14,7 +16,7 @@ import entities from './typeorm';
       username: 'root',
       password: 'root',
       database: 'mbaling_db',
-      entities: entities,
+      entities: [StudentUser, PostEntity],
       synchronize: true,
     }),
   StudentUserModule,

@@ -1,7 +1,11 @@
 export interface StudentUser{
+    photo: string;
     title: string;
     fee: string;
-    description: string;   
-    pkbox: boolean;
+    negotiable: boolean;
+    pkBox: boolean;
+    pcBox: boolean;
+    description: string;
+
     
 }
