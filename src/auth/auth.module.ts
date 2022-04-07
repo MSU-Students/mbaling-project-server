@@ -1,34 +1,43 @@
-import { JwtModule } from '@nestjs/jwt';
-import { SessionSerializer } from './session.serializer';
-import { LocalStrategy } from './utils/LocalStrategy';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentsService } from './../student-users/services/students/students.service';
 import { Module } from '@nestjs/common';
-import { AuthController } from './controllers/auth/auth.controller';
-import { AuthService } from './services/auth/auth.service';
-import { StudentUser } from 'src/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtConfig } from 'src/config/jwt.config';
+import { UserDto } from 'src/user/user.entity';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import Configuration from '../config/configuration';
+import { LocalStrategy } from './local.strategy';
+import { JwtStrategy } from './jwt.strategy';
+import { JwtRefreshTokenStrategy } from './jwt.refresh.token.strategy';
+import { UserService } from 'src/user/user.service';
+import { UserController } from 'src/user/user.controller';
 
 @Module({
   imports:[
-    TypeOrmModule.forFeature([StudentUser]),
-    JwtModule.register({
-      secret: 'SECRET',
-      signOptions: { expiresIn: '60s'}
+    TypeOrmModule.forFeature([UserDto]),
+    PassportModule,
+    ConfigModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule.forFeature(Configuration)],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<JwtConfig>('refresh').secret,
+        signOptions: {
+          expiresIn: configService.get<JwtConfig>('refresh').expiresIn,
+        },
+      }),
     }),
-    PassportModule.register({session: true})
   ],
-  controllers: [AuthController],
-  providers: [
-    {
-      provide: 'AUTH_SERVICE',
-      useClass: AuthService
-    },
-    {
-      provide: 'STUDENT_SERVICE',
-      useClass: StudentsService
-    },
-    LocalStrategy, SessionSerializer
-  ]
+  exports: [AuthService],
+  controllers: [AuthController, UserController],
+  providers: [AuthService,
+    UserService,
+    LocalStrategy,
+    JwtStrategy,
+    UserService,
+    JwtRefreshTokenStrategy],
+
 })
 export class AuthModule {}

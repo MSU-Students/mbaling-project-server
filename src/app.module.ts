@@ -1,30 +1,40 @@
-import { PostEntity } from './typeorm/PostEntity';
-import { StudentUser } from './typeorm/StudentUser';
+import { HousingDto } from './housing-unit/housing.entity';
+import { PostformService } from './postform/postform.service';
+import { PostformController } from './postform/postform.controller';
+import { UserService } from './user/user.service';
+import { UserController } from 'src/user/user.controller';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentUserModule } from './student-users/student-user.module';
 import { AuthModule } from './auth/auth.module';
-import { PostformModule } from './postform/postform.module';
-import entities from './typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserDto } from './user/user.entity';
+import { PostDto } from './entities/post.entity';
+import { ChatModule } from './chat/chat.module';
+import { HousingUnitController } from './housing-unit/housing-unit.controller';
+import { HousingUnitService } from './housing-unit/housing-unit.service';
+import { ChatDto } from './chat/chat.entity';
 
 @Module({
-  imports: [
-  TypeOrmModule.forRoot({
+  imports: ([AuthModule,
+    TypeOrmModule.forFeature([
+      UserDto,
+      PostDto,
+      HousingDto
+    ]),
+    TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'mbaling_db',
-      entities: [StudentUser, PostEntity],
+      database: 'mbalingdb',
+      entities: [UserDto, PostDto, HousingDto, ChatDto
+      ],
       synchronize: true,
-    }),
-  StudentUserModule,
-  AuthModule,
-  PostformModule,
+      // dropSchema: true,
+    })
+  ]),
   
-  ],
-  controllers: [],
-  providers: [],
+  controllers: [UserController, PostformController, HousingUnitController],
+  providers: [UserService, PostformService, HousingUnitService],
 })
 export class AppModule {}
