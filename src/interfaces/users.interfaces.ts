@@ -5,7 +5,7 @@ export interface Users {
    fName: string;
    mName?: string;
    lName: string;
-   isStudent: boolean;
+   type: string;
    email: string;
    birthdate: string;
    degree: string;

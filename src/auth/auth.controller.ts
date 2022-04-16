@@ -80,7 +80,7 @@ export class AuthController {
 
   @ApiOperation({
     summary: 'get profile info',
-    operationId: 'getProfile',
+    operationId: 'profile',
   })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)

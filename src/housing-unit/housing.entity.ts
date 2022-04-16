@@ -1,7 +1,8 @@
+import { UserDto } from 'src/user/user.entity';
 import { IHousing } from './../interfaces/housing.interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { Users } from 'src/interfaces/users.interfaces'; 
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class HousingDto implements IHousing {
@@ -20,4 +21,7 @@ export class HousingDto implements IHousing {
   @ApiProperty({ default: '123' })
   @Column({ length: 100 })
   userId: string;
+
+  @OneToOne(() => UserDto, user => user.housing)
+  user: UserDto
 }

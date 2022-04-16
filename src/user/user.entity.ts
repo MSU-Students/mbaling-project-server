@@ -1,6 +1,9 @@
+import { ChatDto } from './../chat/chat.entity';
+import { PostDto } from './../entities/post.entity';
+import { HousingDto } from './../housing-unit/housing.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Users } from 'src/interfaces/users.interfaces'; 
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity('user')
 export class UserDto implements Users {
@@ -9,6 +12,8 @@ export class UserDto implements Users {
     name: 'student_id'
   })
   id?: number;
+
+  
 
   @ApiProperty({ default: 'Nahed' })
   @Column({ length: 100 })
@@ -26,9 +31,9 @@ export class UserDto implements Users {
   @Column({ length: 100, nullable: true })
   email: string;
 
-  @ApiProperty({ default: 'true' })
-  @Column('bool')
-  isStudent: boolean;
+  @ApiProperty({ default: 'student' })
+  @Column({ length: 100 })
+  type: 'student' | 'landlord' | 'admin';
 
   @ApiProperty({ default: 'active' })
   @Column({ length: 100 })
@@ -90,12 +95,17 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   housingunit: string;
 
-
-
-
-
   @ApiProperty({ required: false })
   @Column({ length: 255, default: '' })
   refreshToken?: string;
-    type: any;
+
+  @OneToOne(() => HousingDto, housing => housing.user)
+  @JoinColumn()
+  housing: HousingDto;
+
+  @OneToMany(() => PostDto, post => post.user)
+  post: PostDto[];
+
+  @OneToMany(() => ChatDto, chat => chat.user)
+  chat: ChatDto[];
 }

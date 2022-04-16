@@ -1,6 +1,7 @@
+import { UserDto } from 'src/user/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IPosts } from 'src/interfaces/posts.interfaces';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('post')
 export class PostDto implements IPosts {
@@ -37,5 +38,8 @@ export class PostDto implements IPosts {
   @ApiProperty({ default: 'Apartment for boyzz' })
   @Column({ length: 100 })
   title: string;
+
+  @ManyToOne(() => UserDto, user => user.post)
+  user: UserDto
 
 }

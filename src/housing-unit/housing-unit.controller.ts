@@ -18,7 +18,7 @@ export class HousingUnitController {
       @ApiOperation({ summary: 'Add new post', operationId: 'AddHousingUnit' })
       @ApiResponse({ status: 200, type: HousingDto })
       @Post('/create')
-      createPost(@Body() createHousingtDto: CreateHousingDto){
+      createPost(@Body() createHousingtDto: HousingDto){
         return this.housingService.createPost(createHousingtDto)
     }
     

@@ -18,7 +18,7 @@ export class PostformController {
       @ApiOperation({ summary: 'Add new post', operationId: 'AddPost' })
       @ApiResponse({ status: 200, type: PostDto })
       @Post('/create')
-      createPost(@Body() createPostDto: CreatePostDto){
+      createPost(@Body() createPostDto: PostDto){
         return this.postService.createPost(createPostDto)
     }
     

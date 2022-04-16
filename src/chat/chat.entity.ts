@@ -1,7 +1,8 @@
 import { IChat } from './../interfaces/chat.interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { IPosts } from 'src/interfaces/posts.interfaces';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { UserDto } from 'src/user/user.entity';
 
 @Entity('chat')
 export class ChatDto implements IChat {
@@ -27,5 +28,8 @@ export class ChatDto implements IChat {
   @ApiProperty({ default: 'Conversation Date' })
   @Column()
   createdAt: string;
+
+  @ManyToOne(() => UserDto, user => user.chat)
+  user: UserDto
 
 }
