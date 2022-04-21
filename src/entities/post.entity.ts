@@ -5,6 +5,7 @@ import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGe
 
 @Entity('post')
 export class PostDto implements IPosts {
+  
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'post_id'
@@ -25,19 +26,35 @@ export class PostDto implements IPosts {
 
   @ApiProperty({ default: 'false' })
   @Column('bool')
-  pcBox: boolean;
+  prvCR: boolean;
 
   @ApiProperty({ default: 'false' })
   @Column('bool')
-  pkBox: boolean;
+  prvKitchen: boolean;
 
-  @ApiProperty({ default: 'example pictures' })
+  @ApiProperty({ default: 'https://cdn.quasar.dev/img/parallax1.jpgs' })
   @Column({ length: 100 })
-  photo: string;
+  photos: string;
 
   @ApiProperty({ default: 'Apartment for boyzz' })
   @Column({ length: 100 })
   title: string;
+
+  @ApiProperty({ default: 'The BOys' })
+  @Column({ length: 100 })
+  username: string;
+
+  @ApiProperty({ default: '0' })
+  @Column()
+  date: number;
+
+  @ApiProperty({ default: 'Zin-Azshari Boarding House' })
+  @Column({ length: 100 })
+  housingAddress: string;
+
+  @ApiProperty({ default: 'https://cdn.quasar.dev/img/avatar2.jpg' })
+  @Column({ length: 100 })
+  prfphoto: string;
 
   @ManyToOne(() => UserDto, user => user.post)
   user: UserDto

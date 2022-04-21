@@ -1,12 +1,17 @@
 export interface IPosts {
     id?: number;
-    photo: string;
-    title: string;
-    fee: string;
-    negotiable: boolean;
-    pkBox: boolean;
-    pcBox: boolean;
-    description: string;
+  title: string;
+  fee: string;
+  description: string;
+  prvKitchen: boolean;
+  prvCR: boolean;
+  photos: string;
+  date: number;
+
+  housingAddress: string;
+  username: string;
+  prfphoto: string;
+    
  
    }
    

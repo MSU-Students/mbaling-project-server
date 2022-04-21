@@ -7,6 +7,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany
 
 @Entity('user')
 export class UserDto implements Users {
+  
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'student_id'
@@ -33,7 +34,7 @@ export class UserDto implements Users {
 
   @ApiProperty({ default: 'student' })
   @Column({ length: 100 })
-  type: 'student' | 'landlord' | 'admin';
+  type: string;
 
   @ApiProperty({ default: 'active' })
   @Column({ length: 100 })
@@ -94,6 +95,10 @@ export class UserDto implements Users {
   @ApiProperty({ default: '123' })
   @Column({ length: 100 })
   housingunit: string;
+
+  @ApiProperty({ default: 'Nahed' })
+  @Column({ length: 100 })
+  profile?: string;
 
   @ApiProperty({ required: false })
   @Column({ length: 255, default: '' })

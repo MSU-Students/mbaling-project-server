@@ -12,13 +12,15 @@ import { ChatModule } from './chat/chat.module';
 import { HousingUnitController } from './housing-unit/housing-unit.controller';
 import { HousingUnitService } from './housing-unit/housing-unit.service';
 import { ChatDto } from './chat/chat.entity';
+import { MediaDto } from './media/media.dto';
 
 @Module({
   imports: ([AuthModule,
     TypeOrmModule.forFeature([
       UserDto,
       PostDto,
-      HousingDto
+      HousingDto,
+      MediaDto
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -27,7 +29,7 @@ import { ChatDto } from './chat/chat.entity';
       username: 'root',
       password: 'root',
       database: 'mbalingdb',
-      entities: [UserDto, PostDto, HousingDto, ChatDto
+      entities: [UserDto, PostDto, HousingDto, ChatDto,MediaDto
       ],
       synchronize: true,
       // dropSchema: true,

@@ -1,13 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Posts } from './post.dto';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostDto } from 'src/entities/post.entity';
 import { Repository } from 'typeorm';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class PostformService {
 
  constructor(
     @InjectRepository(PostDto) private userRepository: Repository<PostDto>,
+    
+    @Inject(forwardRef(() => UserService))
+    private readonly userService: UserService,
+
   ) 
   {
       
@@ -29,4 +35,5 @@ export class PostformService {
   async deleteOne(id: number) {
     return this.userRepository.delete(id);
   }
+
 }

@@ -1,10 +1,11 @@
 import { PostformService } from './postform.service';
 import { PostDto } from './../entities/post.entity';
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Request, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
-import { CreatePostDto } from './post.dto';
+import { CreatePostDto, Posts } from './post.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('postform')
 export class PostformController {
@@ -19,7 +20,8 @@ export class PostformController {
       @ApiResponse({ status: 200, type: PostDto })
       @Post('/create')
       createPost(@Body() createPostDto: PostDto){
-        return this.postService.createPost(createPostDto)
+         return this.postService.createPost(createPostDto)
+        
     }
     
       @ApiOperation({ summary: 'Get all posts', operationId: 'GetPost' })
@@ -46,4 +48,6 @@ export class PostformController {
       async deletePost(@Param('id') id: number) {
         return this.postService.deleteOne(id);
       }
+
+
 }
