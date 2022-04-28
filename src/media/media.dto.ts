@@ -6,7 +6,7 @@ import { Media } from './media.interface';
 @Entity('image')
 export class MediaDto implements Media {
   @ApiProperty({ required: false })
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id?: number;
 
   @ApiProperty()

@@ -1,26 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IPosts } from "src/interfaces/posts.interfaces";
 
-export interface Posts {
-    id?: number;
-    username: string;
-    housingunit: string;
-    photo: string;
-    title: string;
-    fee: string;
-    negotiable: boolean;
-    pkBox: boolean;
-    pcBox: boolean;
-    description: string;
- 
-   }
+
    
-export class CreatePostDto implements Posts{
+export class CreatePostDto implements IPosts{
+
+    id?: number;
 
     @ApiProperty({example: 'hello'})
     username: string;
 
     @ApiProperty({example: 'hello'})
-    housingunit: string;
+    housingAddress: string;
 
 
 
@@ -35,16 +26,22 @@ export class CreatePostDto implements Posts{
     fee: string;
 
     @ApiProperty({example: 0})
-    negotiable: boolean;
+    prvCR: boolean;
 
     @ApiProperty({example: 0})
-    pkBox: boolean;
-
-    @ApiProperty({example: 0})
-    pcBox: boolean;
+    prvKitchen: boolean;
 
     @ApiProperty({example: `Example Description`})
     description: string;
+
+    @ApiProperty({example: 'example'})
+    photos: string;
+
+    @ApiProperty({example: 0})
+    date: number;
+    
+    @ApiProperty({example: 'example'})
+    prfphoto: string;
 
     
 

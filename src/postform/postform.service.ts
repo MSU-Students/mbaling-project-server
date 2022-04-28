@@ -1,4 +1,4 @@
-import { Posts } from './post.dto';
+
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PostDto } from 'src/entities/post.entity';
@@ -22,7 +22,9 @@ export class PostformService {
     return this.userRepository.save(user);
   }
   async findAll(): Promise<PostDto[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      relations: ['userid']
+    });
   }
   async findOne(id: number): Promise<PostDto> {
     return this.userRepository.findOne(id);

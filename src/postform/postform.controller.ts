@@ -4,7 +4,6 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Request, Up
 import { ApiBody, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
-import { CreatePostDto, Posts } from './post.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('postform')
@@ -47,6 +46,16 @@ export class PostformController {
       @Delete(':id')
       async deletePost(@Param('id') id: number) {
         return this.postService.deleteOne(id);
+      }
+
+      @ApiOperation({ summary: 'Get post by id', operationId: 'GetPostById' })
+      @ApiResponse({ status: 200, type: PostDto })
+      @Get(':id')
+      async findOne(@Param('id') id: number): Promise<PostDto> {
+        const post = await this.postService.findOne(id);
+        return {
+          ...post,
+        };
       }
 
 

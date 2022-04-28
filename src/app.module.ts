@@ -1,3 +1,5 @@
+import { MediaService } from './media/media.service';
+import { MediaController } from './media/media.controller';
 import { HousingDto } from './housing-unit/housing.entity';
 import { PostformService } from './postform/postform.service';
 import { PostformController } from './postform/postform.controller';
@@ -32,11 +34,11 @@ import { MediaDto } from './media/media.dto';
       entities: [UserDto, PostDto, HousingDto, ChatDto,MediaDto
       ],
       synchronize: true,
-      // dropSchema: true,
+      dropSchema: true,
     })
   ]),
   
-  controllers: [UserController, PostformController, HousingUnitController],
-  providers: [UserService, PostformService, HousingUnitService],
+  controllers: [UserController, PostformController, HousingUnitController, MediaController],
+  providers: [UserService, PostformService, HousingUnitService, MediaService],
 })
 export class AppModule {}

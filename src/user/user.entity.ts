@@ -74,7 +74,7 @@ export class UserDto implements Users {
 
   @ApiProperty({ default: '2020' })
   @Column({ length: 100 })
-  yearAdmit: string;
+  year: string;
 
   @ApiProperty({ default: 'Street' })
   @Column({ length: 100 })
@@ -88,7 +88,7 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   address3: string;
 
-  @ApiProperty({ default: 'LDS' })
+  @ApiProperty({ default: 'Province' })
   @Column({ length: 100 })
   address4: string;
 
@@ -108,8 +108,8 @@ export class UserDto implements Users {
   @JoinColumn()
   housing: HousingDto;
 
-  @OneToMany(() => PostDto, post => post.user)
-  post: PostDto[];
+  @OneToMany(() => PostDto, post => post.userid)
+  postid: PostDto[];
 
   @OneToMany(() => ChatDto, chat => chat.user)
   chat: ChatDto[];

@@ -22,10 +22,6 @@ export class PostDto implements IPosts {
 
   @ApiProperty({ default: 'false' })
   @Column('bool')
-  negotiable: boolean;
-
-  @ApiProperty({ default: 'false' })
-  @Column('bool')
   prvCR: boolean;
 
   @ApiProperty({ default: 'false' })
@@ -56,7 +52,13 @@ export class PostDto implements IPosts {
   @Column({ length: 100 })
   prfphoto: string;
 
-  @ManyToOne(() => UserDto, user => user.post)
-  user: UserDto
+
+  @ApiProperty({required: false, type:() => Object})
+  @ManyToOne(() => UserDto, user => user.postid, {eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',})
+    @JoinColumn({ name: 'userid' })
+  userid: UserDto
 
 }

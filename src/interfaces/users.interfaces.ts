@@ -13,7 +13,7 @@ export interface Users {
    college: string;
    contact: string;
    gender:string;
-   yearAdmit: string;
+   year: string;
    address1: string;
    address2: string;
    address3: string;
