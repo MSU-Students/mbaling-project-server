@@ -36,10 +36,6 @@ export class PostDto implements IPosts {
   @Column({ length: 100 })
   title: string;
 
-  @ApiProperty({ default: 'The BOys' })
-  @Column({ length: 100 })
-  username: string;
-
   @ApiProperty({ default: '0' })
   @Column()
   date: number;
@@ -48,17 +44,29 @@ export class PostDto implements IPosts {
   @Column({ length: 100 })
   housingAddress: string;
 
-  @ApiProperty({ default: 'https://cdn.quasar.dev/img/avatar2.jpg' })
-  @Column({ length: 100 })
-  prfphoto: string;
+  @ApiProperty({ default: 0 })
+  @Column({ default: '0' })
+  prfphoto: number;
+
+  @ApiProperty({ default: '0' })
+  @Column()
+  url: number;
+
+  @ApiProperty({ default: '0' })
+  @Column()
+  landlordID: number;
+  
 
 
   @ApiProperty({required: false, type:() => Object})
-  @ManyToOne(() => UserDto, user => user.postid, {eager: true,
+  @ManyToOne(() => UserDto, user => user.postid, {
+    eager: true,
     cascade: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',})
-    @JoinColumn({ name: 'userid' })
-  userid: UserDto
+  @JoinColumn({ name: 'userID' })
+  userID: UserDto
+
+
 
 }

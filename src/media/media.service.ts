@@ -33,5 +33,9 @@ export class MediaService {
   async deleteOne(id: number) {
     return this.mediaRepository.delete(id);
   }
+
+  async findAll(): Promise<MediaDto[]> {
+    return this.mediaRepository.find();
+  }
 }
 export default MediaService;

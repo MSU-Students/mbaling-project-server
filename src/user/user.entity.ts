@@ -4,12 +4,12 @@ import { HousingDto } from './../housing-unit/housing.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Users } from 'src/interfaces/users.interfaces'; 
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import {Exclude} from 'class-transformer'
 
 @Entity('user')
 export class UserDto implements Users {
   
   @PrimaryGeneratedColumn({
-    type: 'bigint',
     name: 'student_id'
   })
   id?: number;
@@ -96,21 +96,20 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   housingunit: string;
 
-  @ApiProperty({ default: 'Nahed' })
-  @Column({ length: 100 })
-  profile?: string;
+  @ApiProperty({ default: '0' })
+  @Column({ nullable: true })
+  prfphoto: number;
 
   @ApiProperty({ required: false })
   @Column({ length: 255, default: '' })
   refreshToken?: string;
 
   @OneToOne(() => HousingDto, housing => housing.user)
-  @JoinColumn()
+  @JoinColumn()a
   housing: HousingDto;
 
-  @OneToMany(() => PostDto, post => post.userid)
+  @OneToMany(() => PostDto, post => post.userID)
   postid: PostDto[];
-
   @OneToMany(() => ChatDto, chat => chat.user)
   chat: ChatDto[];
 }

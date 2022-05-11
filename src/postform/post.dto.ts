@@ -8,17 +8,11 @@ export class CreatePostDto implements IPosts{
     id?: number;
 
     @ApiProperty({example: 'hello'})
-    username: string;
-
-    @ApiProperty({example: 'hello'})
     housingAddress: string;
-
-
 
     @ApiProperty({example: 'hello'})
     photo: string;
  
-
     @ApiProperty({example: 'hello'})
     title: string;
 
@@ -41,7 +35,11 @@ export class CreatePostDto implements IPosts{
     date: number;
     
     @ApiProperty({example: 'example'})
-    prfphoto: string;
+    prfphoto: number;
+    
+    @ApiProperty({example: 0})
+    url: number;
+    
 
     
 

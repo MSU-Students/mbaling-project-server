@@ -31,6 +31,7 @@ export class UserService {
   }
 
   async update(id: number, user: UserDto) {
+    
     return this.userRepository.update(id, user);
   }
   async deleteOne(id: number) {
