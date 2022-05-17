@@ -57,6 +57,13 @@ export class MediaController {
     const fileinfo = await this.mediaService.findOne(id);
     res.type(fileinfo.mimeType).send(Buffer.from(fileinfo.data));
   }
+  
+  @ApiOperation({ summary: 'Get all media', operationId: 'GetAllMedia' })
+  @ApiResponse({ status: 200, type: MediaDto })
+  @Get()
+  async findAll(): Promise<MediaDto[]> {
+    return this.mediaService.findAll();
+  }
 
   @ApiOperation({
     summary: 'Delete Media by id',

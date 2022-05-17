@@ -1,9 +1,11 @@
 import { CreateHousingDto } from './housing.dto';
 import { HousingDto } from './housing.entity';
 import { HousingUnitService } from './housing-unit.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
+import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
+import { UserDto } from 'src/user/user.entity';
 
 @Controller('housing-unit')
 export class HousingUnitController {
@@ -28,4 +30,14 @@ export class HousingUnitController {
       async findAllPost(): Promise<HousingDto[]> {
         return this.housingService.findAll();
       }
+
+  @ApiOperation({ summary: 'Get user by name', operationId: 'GetHousingName' })
+  @ApiResponse({ status: 200, type: HousingDto })
+  @Get(':name')
+  async findOne(@Param('name') name: string): Promise<HousingDto> {
+    const housingunit = await this.housingService.findByName(name);
+    return {
+      ...housingunit,
+    };
+  }
 }

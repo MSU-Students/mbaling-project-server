@@ -1,5 +1,5 @@
 export interface IPosts {
-    id?: number;
+  id?: number;
   title: string;
   fee: string;
   description: string;
@@ -7,11 +7,8 @@ export interface IPosts {
   prvCR: boolean;
   photos: string;
   date: number;
-
   housingAddress: string;
-  username: string;
-  prfphoto: string;
-    
- 
+  prfphoto: number;
+  url: number 
    }
    

@@ -19,8 +19,9 @@ export interface Users {
    address3: string;
    address4: string;
    housingunit: string;
-   profile?: string;
    status: 'active' | 'inactive'
+   chatLink: string;
+   mapLink: string;
    refreshToken?: string
 
   }

@@ -17,11 +17,18 @@ export class HousingDto implements IHousing {
   @Column({ length: 100 })
   name: string;
 
-  
-  @ApiProperty({ default: '123' })
-  @Column({ length: 100 })
-  userId: string;
+  @ApiProperty({ example: 1 })
+  @Column({ nullable: true })
+  userID: number
 
-  @OneToOne(() => UserDto, user => user.housing)
-  user: UserDto
+  @OneToOne(() => UserDto, user => user.housing,
+  {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({name: 'userID'})
+  user?: UserDto
+
 }

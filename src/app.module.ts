@@ -33,8 +33,9 @@ import { MediaDto } from './media/media.dto';
       database: 'mbalingdb',
       entities: [UserDto, PostDto, HousingDto, ChatDto,MediaDto
       ],
-      synchronize: true,
-      dropSchema: true,
+      // synchronize: true,
+      // dropSchema: true,
+
     })
   ]),
   
