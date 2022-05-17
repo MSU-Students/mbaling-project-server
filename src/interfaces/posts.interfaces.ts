@@ -9,8 +9,6 @@ export interface IPosts {
   date: number;
   housingAddress: string;
   prfphoto: number;
-  url: number
-    
- 
+  url: number 
    }
    

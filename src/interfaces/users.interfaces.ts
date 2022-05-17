@@ -20,6 +20,8 @@ export interface Users {
    address4: string;
    housingunit: string;
    status: 'active' | 'inactive'
+   chatLink: string;
+   mapLink: string;
    refreshToken?: string
 
   }

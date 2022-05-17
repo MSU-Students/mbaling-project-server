@@ -100,16 +100,31 @@ export class UserDto implements Users {
   @Column({ nullable: true })
   prfphoto: number;
 
+  @ApiProperty({ default: 'm.me/walie' })
+  @Column({ length: 100 })
+  chatLink: string;
+
+  @ApiProperty({ default: 'idont' })
+  @Column({ length: 100 })
+  mapLink: string;
+
+  @ApiProperty({ example: 0 })
+  @Column({ nullable: true })
+  housingID: number;
+
+
+
   @ApiProperty({ required: false })
   @Column({ length: 255, default: '' })
   refreshToken?: string;
 
   @OneToOne(() => HousingDto, housing => housing.user)
-  @JoinColumn()a
-  housing: HousingDto;
+  housing?: HousingDto;
+
 
   @OneToMany(() => PostDto, post => post.userID)
   postid: PostDto[];
+  
   @OneToMany(() => ChatDto, chat => chat.user)
   chat: ChatDto[];
 }
