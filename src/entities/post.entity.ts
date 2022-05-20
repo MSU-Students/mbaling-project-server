@@ -54,18 +54,17 @@ export class PostDto implements IPosts {
 
   @ApiProperty({ default: '0' })
   @Column()
-  landlordID: number;
-  
+  userID: number;
 
 
-  @ApiProperty({required: false, type:() => Object})
+
   @ManyToOne(() => UserDto, user => user.postid, {
     eager: true,
     cascade: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',})
   @JoinColumn({ name: 'userID' })
-  userID: UserDto
+  user?: UserDto
 
 
 

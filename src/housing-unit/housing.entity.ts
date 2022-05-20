@@ -6,6 +6,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'ty
 
 @Entity()
 export class HousingDto implements IHousing {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'housing_id'

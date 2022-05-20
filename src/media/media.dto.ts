@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Media } from './media.interface';
 
-@Entity('image')
+@Entity('images')
 export class MediaDto implements Media {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
