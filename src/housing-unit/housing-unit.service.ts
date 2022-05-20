@@ -16,7 +16,7 @@ export class HousingUnitService {
         return this.housingRepository.save(user);
       }
       async findAll(): Promise<HousingDto[]> {
-        return this.housingRepository.find({relations: ['userID']});
+        return this.housingRepository.find();
       }
       async findByName(name: string): Promise<HousingDto> {
         return this.housingRepository.findOne({ name });
