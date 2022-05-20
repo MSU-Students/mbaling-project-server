@@ -24,7 +24,7 @@ export class HousingUnitController {
         return this.housingService.createPost(createHousingtDto)
     }
     
-      @ApiOperation({ summary: 'Get all posts', operationId: 'GetHousingUnit' })
+      @ApiOperation({ summary: 'Get all housing', operationId: 'GetHousingUnit' })
       @ApiResponse({ status: 200, type: HousingDto })
       @Get()
       async findAllPost(): Promise<HousingDto[]> {
