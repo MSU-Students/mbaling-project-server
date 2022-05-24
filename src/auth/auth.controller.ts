@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards, Request, UnauthorizedException } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
-import { LoginUserDto, AccessTokenDto, RefreshDto } from 'src/user/user.dto';
+import { LoginUserDto, AccessTokenDto, RefreshDto, ChangePasswordDto } from 'src/user/user.dto';
 import { UserDto } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
@@ -48,6 +48,22 @@ export class AuthController {
     await this.userService.setCurrentRefreshToken(refreshToken, userId);
     return { refreshToken, accessToken };
   }
+
+  @ApiOperation({
+    summary: 'Change the password',
+    operationId: 'changePassword',
+  })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiBody({
+    type: ChangePasswordDto,
+  })
+  @Post('changepassword')
+  async changePassword(@Request() req, @Body() info: ChangePasswordDto) {
+    const user = await this.userService.findOne(req.user.userId);
+    return this.authService.changePassword(user, info);
+  }
+  
 
   @ApiOperation({
     summary: 'Refresh Token',

@@ -1,4 +1,3 @@
-import { ChatDto } from './../chat/chat.entity';
 import { PostDto } from './../entities/post.entity';
 import { HousingDto } from './../housing-unit/housing.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -124,6 +123,4 @@ export class UserDto implements Users {
   @OneToMany(() => PostDto, post => post.userID)
   postid: PostDto[];
   
-  @OneToMany(() => ChatDto, chat => chat.user)
-  chat: ChatDto[];
 }

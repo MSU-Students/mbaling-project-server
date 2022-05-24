@@ -110,3 +110,12 @@ export class AccessTokenDto {
   })
   refreshToken?: string;
 }
+
+export class ChangePasswordDto {
+  @ApiProperty()
+  oldPassword: string;
+  
+  @ApiProperty()
+  newPassword: string;
+}
+

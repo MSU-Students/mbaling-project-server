@@ -22,7 +22,7 @@ export class PostformService {
     return this.userRepository.save(user);
   }
   async findAll(): Promise<PostDto[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({relations: ['user']});
   }
   async findOne(id: number): Promise<PostDto> {
     return this.userRepository.findOne(id);

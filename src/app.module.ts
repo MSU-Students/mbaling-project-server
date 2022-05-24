@@ -10,10 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserDto } from './user/user.entity';
 import { PostDto } from './entities/post.entity';
-import { ChatModule } from './chat/chat.module';
 import { HousingUnitController } from './housing-unit/housing-unit.controller';
 import { HousingUnitService } from './housing-unit/housing-unit.service';
-import { ChatDto } from './chat/chat.entity';
 import { MediaDto } from './media/media.dto';
 
 @Module({
@@ -31,7 +29,7 @@ import { MediaDto } from './media/media.dto';
       username: 'root',
       password: 'root',
       database: 'mbalingdb',
-      entities: [UserDto, PostDto, HousingDto, ChatDto,MediaDto
+      entities: [UserDto, PostDto, HousingDto,MediaDto
       ],
       // synchronize: true, 
       // dropSchema: true,
