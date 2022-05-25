@@ -21,4 +21,8 @@ export class HousingUnitService {
       async findByName(name: string): Promise<HousingDto> {
         return this.housingRepository.findOne({ name });
       }
+
+      async update(id: number, user: HousingDto) {
+        return this.housingRepository.update(id, user);
+      }
 }

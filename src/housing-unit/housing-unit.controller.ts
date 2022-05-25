@@ -1,11 +1,12 @@
 import { CreateHousingDto } from './housing.dto';
 import { HousingDto } from './housing.entity';
 import { HousingUnitService } from './housing-unit.service';
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 import { UserDto } from 'src/user/user.entity';
+import { PostDto } from 'src/entities/post.entity';
 
 @Controller('housing-unit')
 export class HousingUnitController {
@@ -40,4 +41,14 @@ export class HousingUnitController {
       ...housingunit,
     };
   }
+  
+  @ApiBearerAuth()
+      @UseGuards(JwtAuthGuard)
+      @ApiOperation({ summary: 'Update housingname by id', operationId: 'UpdateHousingname' })
+      @ApiResponse({ status: 200, type: HousingDto })
+      @Put(':id')
+      async updatePost(@Param('id') id: number, @Body() user: HousingDto) {
+        return this.housingService.update(id, user);
+      }
+    
 }
