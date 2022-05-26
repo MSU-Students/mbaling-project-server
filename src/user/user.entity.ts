@@ -6,7 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany
 
 @Entity('user')
 export class UserDto implements Users {
-  
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn({
     name: 'student_id'
   })

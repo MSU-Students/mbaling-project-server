@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGe
 
 @Entity('post')
 export class PostDto implements IPosts {
-  
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'post_id'
