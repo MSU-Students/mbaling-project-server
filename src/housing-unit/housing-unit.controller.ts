@@ -32,11 +32,11 @@ export class HousingUnitController {
         return this.housingService.findAll();
       }
 
-  @ApiOperation({ summary: 'Get user by name', operationId: 'GetHousingName' })
+  @ApiOperation({ summary: 'Get user by id', operationId: 'GetHousingById' })
   @ApiResponse({ status: 200, type: HousingDto })
-  @Get(':name')
-  async findOne(@Param('name') name: string): Promise<HousingDto> {
-    const housingunit = await this.housingService.findByName(name);
+  @Get(':id')
+  async findOne(@Param('id') id: number): Promise<HousingDto> {
+    const housingunit = await this.housingService.findById(id);
     return {
       ...housingunit,
     };

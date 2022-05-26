@@ -18,8 +18,8 @@ export class HousingUnitService {
       async findAll(): Promise<HousingDto[]> {
         return this.housingRepository.find({relations: ['user']});
       }
-      async findByName(name: string): Promise<HousingDto> {
-        return this.housingRepository.findOne({ name });
+      async findById(id: number): Promise<HousingDto> {
+        return this.housingRepository.findOne(id);
       }
 
       async update(id: number, user: HousingDto) {
