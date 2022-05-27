@@ -1,14 +1,22 @@
 import { UserDto } from 'src/user/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IPosts } from 'src/interfaces/posts.interfaces';
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('post')
 export class PostDto implements IPosts {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn({
     type: 'bigint',
-    name: 'post_id'
+    name: 'post_id',
   })
   id?: number;
 
@@ -56,16 +64,12 @@ export class PostDto implements IPosts {
   @Column()
   userID: number;
 
-
-
-  @ManyToOne(() => UserDto, user => user.postid, {
+  @ApiProperty({ required: false, type: () => UserDto })
+  @ManyToOne(() => UserDto, (user) => user.postid, {
     eager: true,
     cascade: true,
     onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',})
-  @JoinColumn({ name: 'userID' })
-  user?: UserDto
-
-
-
+    onUpdate: 'CASCADE',
+  })
+  user?: UserDto;
 }
