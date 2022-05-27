@@ -1,18 +1,23 @@
 import { PostDto } from './../entities/post.entity';
 import { HousingDto } from './../housing-unit/housing.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Users } from 'src/interfaces/users.interfaces'; 
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Users } from 'src/interfaces/users.interfaces';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 
 @Entity('user')
 export class UserDto implements Users {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn({
-    name: 'student_id'
+    name: 'student_id',
   })
   id?: number;
-
-  
 
   @ApiProperty({ default: 'Nahed' })
   @Column({ length: 100 })
@@ -53,7 +58,7 @@ export class UserDto implements Users {
   @ApiProperty({ default: 'BS-IT' })
   @Column({ length: 100 })
   degree: string;
-  
+
   @ApiProperty({ default: 'Department of Computer Science' })
   @Column({ length: 100 })
   department: string;
@@ -65,7 +70,7 @@ export class UserDto implements Users {
   @ApiProperty({ default: '0907-478-7550' })
   @Column({ length: 100 })
   contact: string;
-  
+
   @ApiProperty({ default: 'Male' })
   @Column({ length: 100 })
   gender: string;
@@ -110,17 +115,14 @@ export class UserDto implements Users {
   @Column({ nullable: true })
   housingID: number;
 
-
-
   @ApiProperty({ required: false })
   @Column({ length: 255, default: '' })
   refreshToken?: string;
 
-  @OneToOne(() => HousingDto, housing => housing.user)
+  @ApiProperty({ required: false, type: () => HousingDto })
+  @OneToOne(() => HousingDto, (housing) => housing.user)
   housing?: HousingDto;
 
-
-  @OneToMany(() => PostDto, post => post.userID)
+  @OneToMany(() => PostDto, (post) => post.userID)
   postid: PostDto[];
-  
 }
