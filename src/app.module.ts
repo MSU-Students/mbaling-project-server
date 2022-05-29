@@ -13,6 +13,9 @@ import { PostDto } from './entities/post.entity';
 import { HousingUnitController } from './housing-unit/housing-unit.controller';
 import { HousingUnitService } from './housing-unit/housing-unit.service';
 import { MediaDto } from './media/media.dto';
+import { ApplicationService } from './application/application.service';
+import { ApplicationController } from './application/application.controller';
+import { ApplicationDto } from './application/application.entity';
 
 @Module({
   imports: ([AuthModule,
@@ -20,7 +23,8 @@ import { MediaDto } from './media/media.dto';
       UserDto,
       PostDto,
       HousingDto,
-      MediaDto
+      MediaDto,
+      ApplicationDto
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -29,15 +33,15 @@ import { MediaDto } from './media/media.dto';
       username: 'root',
       password: 'root',
       database: 'mbalingdb',
-      entities: [UserDto, PostDto, HousingDto,MediaDto
+      entities: [UserDto, PostDto, HousingDto,MediaDto,ApplicationDto
       ],
-      // synchronize: true, 
+      // synchronize: true,
       // dropSchema: true,
 
     })
   ]),
   
-  controllers: [UserController, PostformController, HousingUnitController, MediaController],
-  providers: [UserService, PostformService, HousingUnitService, MediaService],
+  controllers: [UserController, PostformController, HousingUnitController, MediaController, ApplicationController],
+  providers: [UserService, PostformService, HousingUnitService, MediaService, ApplicationService],
 })
 export class AppModule {}

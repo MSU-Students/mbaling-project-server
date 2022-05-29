@@ -1,3 +1,4 @@
+import { MediaDto } from './../media/media.dto';
 import { UserDto } from 'src/user/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IPosts } from 'src/interfaces/posts.interfaces';
@@ -36,7 +37,7 @@ export class PostDto implements IPosts {
   @Column('bool')
   prvKitchen: boolean;
 
-  @ApiProperty({ default: 'https://cdn.quasar.dev/img/parallax1.jpgs' })
+  @ApiProperty({ default: 'https://cdn.quasar.dev/img/parallax1.jpg' })
   @Column({ length: 100 })
   photos: string;
 
@@ -71,5 +72,10 @@ export class PostDto implements IPosts {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
+  @JoinColumn({name: 'userID'})
   user?: UserDto;
+
+  @ApiProperty({ required: false, type: () => MediaDto })
+  @OneToMany(() => MediaDto, (media) => media.postPhoto)
+  media?: MediaDto;
 }
