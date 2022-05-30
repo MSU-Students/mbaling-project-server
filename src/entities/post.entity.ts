@@ -11,6 +11,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ApplicationDto } from 'src/application/application.entity';
 
 @Entity('post')
 export class PostDto implements IPosts {
@@ -78,4 +79,7 @@ export class PostDto implements IPosts {
   @ApiProperty({ required: false, type: () => MediaDto })
   @OneToMany(() => MediaDto, (media) => media.postPhoto)
   media?: MediaDto;
+
+  @OneToMany(() => ApplicationDto, (application) => application.student)
+  applications?: ApplicationDto[];  
 }

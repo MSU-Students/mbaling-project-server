@@ -10,6 +10,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+import { ApplicationDto } from 'src/application/application.entity';
 
 @Entity('user')
 export class UserDto implements Users {
@@ -125,4 +126,10 @@ export class UserDto implements Users {
 
   @OneToMany(() => PostDto, (post) => post.userID)
   postid: PostDto[];
+
+  @OneToMany(() => ApplicationDto, (studentApplication) => studentApplication.student)
+  studentApplication: ApplicationDto[];
+
+  @OneToMany(() => ApplicationDto, (landlordApplication) => landlordApplication.landlord)
+  landlordApplication: ApplicationDto[];
 }
