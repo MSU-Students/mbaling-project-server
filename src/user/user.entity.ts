@@ -1,3 +1,4 @@
+import { NonAccountDto } from './../non-account/non-account.entity';
 import { PostDto } from './../entities/post.entity';
 import { HousingDto } from './../housing-unit/housing.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -9,6 +10,7 @@ import {
   OneToOne,
   JoinColumn,
   OneToMany,
+  ManyToMany,
 } from 'typeorm';
 import { ApplicationDto } from 'src/application/application.entity';
 
@@ -16,7 +18,7 @@ import { ApplicationDto } from 'src/application/application.entity';
 export class UserDto implements Users {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn({
-    name: 'student_id',
+    name: 'user_id',
   })
   id?: number;
 
@@ -132,4 +134,7 @@ export class UserDto implements Users {
 
   @OneToMany(() => ApplicationDto, (landlordApplication) => landlordApplication.landlord)
   landlordApplication: ApplicationDto[];
+
+  @OneToMany(() => NonAccountDto, (nonAccount) => nonAccount.landlord)
+  nonAccount: NonAccountDto[];
 }

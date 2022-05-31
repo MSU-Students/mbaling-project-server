@@ -1,6 +1,6 @@
 import { PostDto } from 'src/entities/post.entity';
 
-import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Media } from './media.interface';
 
@@ -23,9 +23,12 @@ export class MediaDto implements Media {
   })
   data: Uint8Array;
 
-  @ApiProperty({ required: false, type: () => PostDto })
-  @ManyToOne(() => PostDto, (postPhoto) => postPhoto.media)
-  postPhoto?: PostDto;
+  @ApiProperty({ required: false, nullable: true })
+  @Column({nullable:true})
+  postPhotoID: string;
 
-  
+  @ApiProperty({ nullable: true , required: false, type: () => PostDto })
+  @ManyToOne(() => PostDto, (postPhoto) => postPhoto.media)
+  @JoinColumn({name: "postPhotoID"})
+  postPhoto?: PostDto;
 }

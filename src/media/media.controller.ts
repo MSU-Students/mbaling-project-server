@@ -74,4 +74,28 @@ export class MediaController {
   async delete(@Param('id') id: number) {
     return this.mediaService.deleteOne(id);
   }
+
+
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  @ApiOperation({
+    summary: 'Update Media by id',
+    operationId: 'UpdateMedia',
+  })
+  @ApiResponse({ status: 200, type: MediaDto })
+  @Put(':id')
+  @UseInterceptors(FileInterceptor('file'))
+  async update(@Param('id') id: number,@UploadedFile() file: Express.Multer.File) {
+    return this.mediaService.update(id, file);
+  }
 }

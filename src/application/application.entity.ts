@@ -7,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -20,12 +21,13 @@ export class ApplicationDto implements IApplication {
   status: string;
   
   @ApiProperty({ required: false, type: () => UserDto })
-  @ManyToOne(() => UserDto, (student) => student.studentApplication , {
+  @OneToOne(() => UserDto, (student) => student.studentApplication , {
     eager: true,
     cascade: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
+  @JoinColumn()
   student?: UserDto;
 
   @ApiProperty({ required: false, type: () => UserDto })
@@ -44,5 +46,6 @@ export class ApplicationDto implements IApplication {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
+  @JoinColumn()
   post?: PostDto;
 }

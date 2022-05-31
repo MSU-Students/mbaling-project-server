@@ -1,3 +1,4 @@
+import { NonAccountDto } from './non-account/non-account.entity';
 import { MediaService } from './media/media.service';
 import { MediaController } from './media/media.controller';
 import { HousingDto } from './housing-unit/housing.entity';
@@ -16,6 +17,8 @@ import { MediaDto } from './media/media.dto';
 import { ApplicationService } from './application/application.service';
 import { ApplicationController } from './application/application.controller';
 import { ApplicationDto } from './application/application.entity';
+import { NonAccountController } from './non-account/non-account.controller';
+import { NonAccountService } from './non-account/non-account.service';
 
 @Module({
   imports: ([AuthModule,
@@ -24,7 +27,8 @@ import { ApplicationDto } from './application/application.entity';
       PostDto,
       HousingDto,
       MediaDto,
-      ApplicationDto
+      ApplicationDto,
+      NonAccountDto
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -33,7 +37,7 @@ import { ApplicationDto } from './application/application.entity';
       username: 'root',
       password: 'root',
       database: 'mbalingdb',
-      entities: [UserDto, PostDto, HousingDto,MediaDto,ApplicationDto
+      entities: [UserDto, PostDto, HousingDto,MediaDto,ApplicationDto,NonAccountDto
       ],
       // synchronize: true,
       // dropSchema: true,
@@ -41,7 +45,7 @@ import { ApplicationDto } from './application/application.entity';
     })
   ]),
   
-  controllers: [UserController, PostformController, HousingUnitController, MediaController, ApplicationController],
-  providers: [UserService, PostformService, HousingUnitService, MediaService, ApplicationService],
+  controllers: [UserController, PostformController, HousingUnitController, MediaController, ApplicationController, NonAccountController],
+  providers: [UserService, PostformService, HousingUnitService, MediaService, ApplicationService, NonAccountService],
 })
 export class AppModule {}
