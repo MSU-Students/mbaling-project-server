@@ -41,10 +41,13 @@ export class MediaController {
     operationId: 'UploadMedia',
   })
   @ApiResponse({ status: 201, type: MediaDto })
-  @Post('/uploadFile')
+  @Post('/uploadFile/:id')
   @UseInterceptors(FileInterceptor('file'))
-  async upload(@UploadedFile() file: Express.Multer.File) {
-    return await this.mediaService.uploadFile(file);
+  async upload(
+    @Param('id') id: number,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return await this.mediaService.uploadFile(file, id);
   }
 
   @ApiOperation({
@@ -57,7 +60,7 @@ export class MediaController {
     const fileinfo = await this.mediaService.findOne(id);
     res.type(fileinfo.mimeType).send(Buffer.from(fileinfo.data));
   }
-  
+
   @ApiOperation({ summary: 'Get all media', operationId: 'GetAllMedia' })
   @ApiResponse({ status: 200, type: MediaDto })
   @Get()
@@ -74,7 +77,6 @@ export class MediaController {
   async delete(@Param('id') id: number) {
     return this.mediaService.deleteOne(id);
   }
-
 
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -95,7 +97,10 @@ export class MediaController {
   @ApiResponse({ status: 200, type: MediaDto })
   @Put(':id')
   @UseInterceptors(FileInterceptor('file'))
-  async update(@Param('id') id: number,@UploadedFile() file: Express.Multer.File) {
+  async update(
+    @Param('id') id: number,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
     return this.mediaService.update(id, file);
   }
 }

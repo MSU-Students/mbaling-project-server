@@ -76,7 +76,7 @@ export class PostDto implements IPosts {
   @JoinColumn({name: 'userID'})
   user?: UserDto;
 
-  @ApiProperty({ required: false, type: () => MediaDto })
+  @ApiProperty({nullable: true, required: false, type: () => MediaDto })
   @OneToMany(() => MediaDto, (media) => media.postPhoto)
   media?: MediaDto;
 

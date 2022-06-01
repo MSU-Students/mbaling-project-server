@@ -9,11 +9,12 @@ export class MediaService {
     @InjectRepository(MediaDto) private mediaRepository: Repository<MediaDto>,
   ) {}
 
-  async uploadFile(file: Express.Multer.File) {
+  async uploadFile(file: Express.Multer.File, id: any) {
     const createFile = this.mediaRepository.create({
       data: file.buffer,
       filename: file.filename || file.originalname,
       mimeType: file.mimetype,
+      postPhotoID: id,
     });
     return await this.mediaRepository.save(createFile);
   }
