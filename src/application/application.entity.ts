@@ -38,14 +38,4 @@ export class ApplicationDto implements IApplication {
     onUpdate: 'CASCADE',
   })
   landlord?: UserDto;
-
-  @ApiProperty({ required: false, type: () => PostDto })
-  @ManyToOne(() => PostDto, (post) => post.applications, {
-    eager: true,
-    cascade: true,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn()
-  post?: PostDto;
 }
