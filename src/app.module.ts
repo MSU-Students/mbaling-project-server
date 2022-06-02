@@ -1,3 +1,4 @@
+import { PrfMediaDto } from './prfmedia/prfmedia.dto';
 import { NonAccountDto } from './non-account/non-account.entity';
 import { MediaService } from './media/media.service';
 import { MediaController } from './media/media.controller';
@@ -19,6 +20,8 @@ import { ApplicationController } from './application/application.controller';
 import { ApplicationDto } from './application/application.entity';
 import { NonAccountController } from './non-account/non-account.controller';
 import { NonAccountService } from './non-account/non-account.service';
+import { PrfmediaController } from './prfmedia/prfmedia.controller';
+import { PrfmediaService } from './prfmedia/prfmedia.service';
 
 @Module({
   imports: ([AuthModule,
@@ -28,7 +31,8 @@ import { NonAccountService } from './non-account/non-account.service';
       HousingDto,
       MediaDto,
       ApplicationDto,
-      NonAccountDto
+      NonAccountDto,
+      PrfMediaDto
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -37,7 +41,7 @@ import { NonAccountService } from './non-account/non-account.service';
       username: 'root',
       password: 'root',
       database: 'mbalingdb',
-      entities: [UserDto, PostDto, HousingDto,MediaDto,ApplicationDto,NonAccountDto
+      entities: [UserDto, PostDto, HousingDto,MediaDto,ApplicationDto,NonAccountDto, PrfMediaDto
       ],
       // synchronize: true,
       // dropSchema: true,
@@ -45,7 +49,7 @@ import { NonAccountService } from './non-account/non-account.service';
     })
   ]),
   
-  controllers: [UserController, PostformController, HousingUnitController, MediaController, ApplicationController, NonAccountController],
-  providers: [UserService, PostformService, HousingUnitService, MediaService, ApplicationService, NonAccountService],
+  controllers: [UserController, PostformController, HousingUnitController, MediaController, ApplicationController, NonAccountController, PrfmediaController],
+  providers: [UserService, PostformService, HousingUnitService, MediaService, ApplicationService, NonAccountService, PrfmediaService],
 })
 export class AppModule {}
