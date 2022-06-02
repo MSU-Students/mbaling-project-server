@@ -27,8 +27,13 @@ export class MediaDto implements Media {
   @Column({nullable:true})
   postPhotoID: string;
 
-  @ApiProperty({ nullable: true , required: false, type: () => PostDto })
-  @ManyToOne(() => PostDto, (postPhoto) => postPhoto.media)
+  @ApiProperty({required: false, type: () => PostDto })
+  @ManyToOne(() => PostDto, (postPhoto) => postPhoto.media,{
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({name: "postPhotoID"})
   postPhoto?: PostDto;
 }
