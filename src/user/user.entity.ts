@@ -114,25 +114,28 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   mapLink: string;
 
-  @ApiProperty({ example: 0 })
-  @Column({ nullable: true })
-  housingID: number;
-
   @ApiProperty({ required: false })
   @Column({ length: 255, default: '' })
   refreshToken?: string;
 
   @ApiProperty({ required: false, type: () => HousingDto })
-  @OneToOne(() => HousingDto, (housing) => housing.user)
+  @OneToOne(() => HousingDto, (housing) => housing.user, { nullable: true })
+  @JoinColumn()
   housing?: HousingDto;
 
   @OneToMany(() => PostDto, (post) => post.userID)
   postid: PostDto[];
 
-  @OneToMany(() => ApplicationDto, (studentApplication) => studentApplication.student)
+  @OneToMany(
+    () => ApplicationDto,
+    (studentApplication) => studentApplication.student,
+  )
   studentApplication: ApplicationDto[];
 
-  @OneToMany(() => ApplicationDto, (landlordApplication) => landlordApplication.landlord)
+  @OneToMany(
+    () => ApplicationDto,
+    (landlordApplication) => landlordApplication.landlord,
+  )
   landlordApplication: ApplicationDto[];
 
   @OneToMany(() => NonAccountDto, (nonAccount) => nonAccount.landlord)

@@ -5,23 +5,24 @@ import { UserDto } from './user.entity';
 
 @Injectable()
 export class UserService {
-    async setCurrentRefreshToken(refreshToken: string, userId: number) {
-        const user = await this.findOne(userId);
-        if (user) {
-          user.refreshToken = refreshToken;
-          await this.update(userId, user);
-        }
-      }
+  async setCurrentRefreshToken(refreshToken: string, userId: number) {
+    const user = await this.findOne(userId);
+    if (user) {
+      user.refreshToken = refreshToken;
+      await this.update(userId, user);
+    }
+  }
 
-
- constructor(
+  constructor(
     @InjectRepository(UserDto) private userRepository: Repository<UserDto>,
   ) {}
   async create(user: UserDto): Promise<UserDto> {
     return this.userRepository.save(user);
   }
   async findAll(): Promise<UserDto[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      relations: ['housing'],
+    });
   }
   async findOne(id: number): Promise<UserDto> {
     return this.userRepository.findOne(id);
@@ -31,18 +32,16 @@ export class UserService {
   }
 
   async update(id: number, user: UserDto) {
-    
     return this.userRepository.update(id, user);
   }
   async deleteOne(id: number) {
     return this.userRepository.delete(id);
   }
 
-  async getUserInfo(user: UserDto){
-    return{
-      name : user.fName,
-      college: user.college
-    }
+  async getUserInfo(user: UserDto) {
+    return {
+      name: user.fName,
+      college: user.college,
+    };
   }
 }
-

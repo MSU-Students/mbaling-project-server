@@ -11,7 +11,7 @@ export class ApplicationService {
     return this.applicationRepository.save(application);
   }
   async findAll(): Promise<ApplicationDto[]> {
-    return this.applicationRepository.find();
+    return this.applicationRepository.find({relations: ['landlord', 'student']});
   }
   async findOne(id: number): Promise<ApplicationDto> {
     return this.applicationRepository.findOne(id);
