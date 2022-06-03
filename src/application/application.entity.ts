@@ -13,6 +13,7 @@ import {
 
 @Entity('Application')
 export class ApplicationDto implements IApplication {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   id?: number;
 

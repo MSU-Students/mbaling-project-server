@@ -23,7 +23,7 @@ export class PostDto implements IPosts {
   id?: number;
 
   @ApiProperty({ default: 'Example description' })
-  @Column({ length: 100 })
+  @Column({type: 'text'})
   description: string;
 
   @ApiProperty({ default: '1000' })
