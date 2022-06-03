@@ -54,10 +54,6 @@ export class PostDto implements IPosts {
   @Column({ length: 100 })
   housingAddress: string;
 
-  @ApiProperty({ default: 0 })
-  @Column({ default: '0' })
-  prfphoto: number;
-
   @ApiProperty({ default: '0' })
   @Column()
   url: number;

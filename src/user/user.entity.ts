@@ -98,10 +98,6 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   address4: string;
 
-  @ApiProperty({ default: '123' })
-  @Column({ length: 100 })
-  housingunit: string;
-
   @ApiProperty({ default: '0' })
   @Column({ nullable: true })
   prfphoto: number;

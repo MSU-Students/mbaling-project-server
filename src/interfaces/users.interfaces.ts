@@ -18,7 +18,6 @@ export interface Users {
    address2: string;
    address3: string;
    address4: string;
-   housingunit: string;
    status: 'active' | 'inactive'
    chatLink: string;
    mapLink: string;
