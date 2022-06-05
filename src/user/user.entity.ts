@@ -11,8 +11,11 @@ import {
   JoinColumn,
   OneToMany,
   ManyToMany,
+  JoinTable,
+  ManyToOne,
 } from 'typeorm';
 import { ApplicationDto } from 'src/application/application.entity';
+import { join } from 'path';
 
 @Entity('user')
 export class UserDto implements Users {
@@ -38,7 +41,7 @@ export class UserDto implements Users {
   @Column({ length: 100, nullable: true })
   email: string;
 
-  @ApiProperty({ default: 'student' })
+  @ApiProperty({ default: 'admin' })
   @Column({ length: 100 })
   type: string;
 
@@ -46,7 +49,7 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   status: 'active' | 'inactive';
 
-  @ApiProperty({ default: 'user' })
+  @ApiProperty({ default: 'admin' })
   @Column({ length: 100 })
   username: string;
 
@@ -114,10 +117,17 @@ export class UserDto implements Users {
   @Column({ length: 255, default: '' })
   refreshToken?: string;
 
-  @ApiProperty({ required: false, type: () => HousingDto })
-  @OneToOne(() => HousingDto, (housing) => housing.user, { nullable: true })
+
+  @ApiProperty({default: null, required: true, type: () => HousingDto })
+  @ManyToOne(() => HousingDto, (housing) => housing.user, {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    nullable: true
+  })
   @JoinColumn()
-  housing?: HousingDto;
+  housing?: HousingDto[];
 
   @OneToMany(() => PostDto, (post) => post.userID)
   postid: PostDto[];
