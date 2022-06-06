@@ -6,7 +6,7 @@ export interface IPosts {
   prvKitchen: boolean;
   prvCR: boolean;
   photos: string;
-  date: string;
+  visibility: boolean;
   housingAddress: string;
   url: number 
    }

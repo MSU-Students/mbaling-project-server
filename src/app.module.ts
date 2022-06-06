@@ -43,8 +43,8 @@ import { PrfmediaService } from './prfmedia/prfmedia.service';
       database: 'mbalingdb',
       entities: [UserDto, PostDto, HousingDto,MediaDto,ApplicationDto,NonAccountDto, PrfMediaDto
       ],
-      // synchronize: true,
-      // dropSchema: true,
+      synchronize: true,
+      dropSchema: true,
 
     })
   ]),
