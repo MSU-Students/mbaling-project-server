@@ -47,8 +47,8 @@ export class PostDto implements IPosts {
   title: string;
 
   @ApiProperty({ default: '0' })
-  @Column('bool')
-  visibility: boolean;
+  @Column({ length: 100 })
+  visibility: string;
 
   @ApiProperty({ default: 'Zin-Azshari Boarding House' })
   @Column({ length: 100 })

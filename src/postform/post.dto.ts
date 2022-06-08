@@ -32,7 +32,7 @@ export class CreatePostDto implements IPosts{
     photos: string;
 
     @ApiProperty({example: 0})
-    visibility: boolean;
+    visibility: string;
     
     @ApiProperty({example: 'example'})
     prfphoto: number;
