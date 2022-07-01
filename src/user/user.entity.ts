@@ -25,6 +25,10 @@ export class UserDto implements Users {
   })
   id?: number;
 
+  @ApiProperty({ default: '0' })
+  @Column({ nullable: false })
+  studentId: number;
+
   @ApiProperty({ default: 'Nahed' })
   @Column({ length: 100 })
   fName: string;
